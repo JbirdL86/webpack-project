@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import _, { create } from 'lodash';
 import './style.css';
 
@@ -16,8 +17,8 @@ const tasksList = [
     description: 'Wipe the floor',
     completed: false,
     index: 2,
-  }
-]
+  },
+];
 
 const createTask = (task) => {
   const li = document.createElement('li');
@@ -29,18 +30,18 @@ const createTask = (task) => {
         <p class="task-description">${task.description}</p>
       </label>
     <i class="fas fa-ellipsis-v"></i>
-    </li>`
+    </li>`;
 
-    return li;
-}
+  return li;
+};
 
 const displayTasks = (taskList) => {
   const taskUl = document.querySelector('.list-placeholder');
 
-  taskList.forEach(element => {
+  taskList.forEach((element) => {
     const li = createTask(element);
     taskUl.appendChild(li);
   });
-}
+};
 
 window.onload = displayTasks(tasksList);
