@@ -24,4 +24,4 @@ export const dropSort = (event) => {
     event.currentTarget.children[0].dataset.id = previousSecondId;
     event.currentTarget.children[1].dataset.id = previousSecondId;
   } 
-};  
+};

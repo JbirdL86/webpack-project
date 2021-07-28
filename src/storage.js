@@ -1,5 +1,5 @@
 class Storage {
-  setStorage(taskListgit ) {
+  setStorage(taskList) {
     window.localStorage.setItem('tasks', JSON.stringify(taskList));
   }
 

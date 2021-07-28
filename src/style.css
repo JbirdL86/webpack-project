@@ -8,6 +8,7 @@
 
 body {
   background-color: #d3cece;
+  user-select: none;
 }
 
 main {
@@ -65,4 +66,8 @@ main {
   display: flex;
   background-color: #f6f6f6;
   justify-content: center;
+} 
+
+.dragging {
+  opacity: .5;
 }
