@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import _, { create } from 'lodash';
 import './style.css';
-//constant array
+// constant array
 const tasksList = [
   {
     description: 'Wash dishes',
