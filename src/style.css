@@ -8,6 +8,7 @@
 
 body {
   background-color: #d3cece;
+  user-select: none;
 }
 
 main {
@@ -44,20 +45,35 @@ main {
 .task-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
   border-bottom: 2px solid #f6f6f6;
+  background-color: #fff;
 }
 
 .task-label {
   display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .fa-ellipsis-v {
   cursor: cell;
 }
 
+.marked {
+  text-decoration: line-through;
+}
+
 .task-description {
   margin-left: 10px;
+  font-size: 20px;
+  border: none;
+  width: 100%;
+}
+
+input[type="text"]:focus {
+  outline: none;
 }
 
 .clear-completed {
@@ -65,4 +81,8 @@ main {
   display: flex;
   background-color: #f6f6f6;
   justify-content: center;
+}
+
+.dragging {
+  opacity: 0.5;
 }
