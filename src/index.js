@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import _, { create } from 'lodash';
 import './style.css';
-import storage from './storage';
-import { dragDropListeners }from './eventHandler.js';
+import setStorage from './storage.js';
+import { dragDropListeners, taskComplete } from './eventHandler.js';
 
-const tasksList = [
+let tasksList = [
   {
     description: 'Wash dishes',
     completed: false,
@@ -27,17 +27,15 @@ const createTask = (task) => {
   li.classList.add('task-item');
   dragDropListeners(li);
 
-
   li.innerHTML = `
         <label class="task-label">
           <input class="checkbox" type="checkbox" value="${task.completed}">
-          <p class="task-description">${task.description}</p>
+          <input class="task-description" type="text" value="${task.description}">
+          <input type="hidden" class="" value="${task.index}">
         </label>
         <i class="fas fa-ellipsis-v"></i>`;
 
-  li.addEventListener('change', (e,li) => {
-    checkCompleted(e,li);
-  })
+  taskComplete(li);
 
   return li;
 };
@@ -45,15 +43,16 @@ const createTask = (task) => {
 const displayTasks = (taskList) => {
   const taskUl = document.querySelector('.list-placeholder');
 
-  storage.setStorage(taskList);
   taskList.forEach((element) => {
     const li = createTask(element);
     taskUl.appendChild(li);
   });
 };
 
-if(storage.hasStorage()){
-  window.onload = displayTasks(storage.getStorage());
+if (localStorage.getItem('tasks')) {
+  tasksList = JSON.parse(localStorage.getItem('tasks'));
+  displayTasks(tasksList);
 } else {
-  window.onload = displayTasks(tasksList);
+  setStorage(tasksList);
+  displayTasks(tasksList);
 }
