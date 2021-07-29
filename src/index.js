@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import _, { create } from 'lodash';
 import './style.css';
-// constant array
-const tasksList = [
+import setStorage from './storage.js';
+import { dragDropListeners, taskComplete } from './eventHandler.js';
+
+let tasksList = [
   {
     description: 'Wash dishes',
     completed: false,
