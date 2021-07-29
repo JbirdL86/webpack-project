@@ -13,6 +13,14 @@
 - javaScript
 - webpack
 
+To get a local copy up and running follow these simple example steps.
+Run:
+- `git clone https://github.com/hunter4466/todolist_project.git`
+- `cd todolist_project`
+-`Install node_modules, run npm install and install the latest node version`
+-`Install webpack package`
+- Open ./dist/index.html in browser
+
 ## Live Demo
 
 [Live Demo Link](https://jbirdl86.github.io/Capstone/)
