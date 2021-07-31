@@ -1,6 +1,7 @@
 import dropSort from './drag.js';
 import checkCompleted from './completed.js';
 import setStorage from './storage.js';
+import { addNewTask, editTask, deleteTask, clearSelected } from './crud.js';
 
 function update() {
   const checkBoxItems = document.querySelectorAll('.checkbox');
@@ -14,6 +15,10 @@ function update() {
     });
   }
   setStorage(newObj);
+}
+
+function refresh() {
+  
 }
 
 export const dragDropListeners = () => {
@@ -54,3 +59,46 @@ export const taskCompleteListners = (element) => {
     update();
   });
 };
+
+export const addNewListner = () => {
+  const newTask = document.querySelector('#input-task');
+
+  newTask.addEventListener('keyup', (e) => {
+    addNewTask(e);
+    update();
+  });
+}
+
+export const editTaskListners = () => {
+  const tasksInput = document.querySelectorAll('.task-description');
+  const arrInput = Array.from(tasksInput);
+
+  arrInput.forEach((input) => {
+    input.addEventListener('input', (e) => {
+      editTask(e);
+      update();
+    });
+  })
+  
+}
+
+export const deleteTaskListner = () => {
+  const tasks = document.querySelectorAll('.fa-trash-alt');
+  const tasksArr = Array.from(tasks);
+
+  tasksArr.forEach((task) => {
+    task.addEventListener('click', (e) => {
+      deleteTask(e);
+      update();
+    });
+  })
+}
+
+export const deleteAllListner = () => {
+  const clearTasks = document.querySelector('#clear-tasks');
+
+  clearTasks.addEventListener('click', (e) => {
+    clearSelected(e);
+    update();
+  })
+}
