@@ -79,7 +79,6 @@ main {
 input[type="text"]:focus {
   outline: none;
   font-size: 20px;
-  
 }
 
 .clear-completed {
