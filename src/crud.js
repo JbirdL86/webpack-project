@@ -1,45 +1,20 @@
-import { dragDropListeners, taskCompleteListners, addNewListner, editTaskListners, deleteTaskListner, deleteAllListner } from './eventHandler.js';
+/* eslint-disable import/no-cycle */
+import {
+  dragDropListeners,
+  taskCompleteListners,
+  addNewListner,
+  editTaskListners,
+  deleteTaskListner,
+  deleteAllListner,
+} from './eventHandler.js';
 
 class Task {
-  constructor(description, completed = false, index = taskList.length + 1) {
+  constructor(description, completed, index) {
     this.description = description;
     this.completed = completed;
     this.index = index;
   }
 }
-
-export const taskList = []; 
-
-export function addNewTask(event) {
-  const input = document.querySelector('#input-task');
-
-  if(event.key === 'Enter' && input.value !== '' && event.target.matches('#input-task')) {
-    console.log(event.target);
-    taskList.push(new Task(input.value, false, taskList.length + 1)); 
-    console.log(taskList);
-    displayTasks(taskList);
-    setListners();
-  }
-}
-
-export function editTask(event) {
-  console.log(event.target);
-  const task = event.target.value;
-  const index = event.target.nextElementSibling.value;
-  console.log(task.description);
-  console.log(taskList)
-
-}
-
-export function deleteTask(event) {
-  console.log(event);
-}
-
-export function clearSelected(event) {
-  console.log(event);
-}
-
-
 
 export const createTask = (task) => {
   const divContainer = document.createElement('div');
@@ -59,12 +34,9 @@ export const createTask = (task) => {
         <i class="far fa-trash-alt"></i>`;
 
   divContainer.appendChild(li);
-  taskCompleteListners(li);
 
   return divContainer;
 };
-
-
 
 export const displayTasks = (taskList) => {
   const taskUl = document.querySelector('.list-placeholder');
@@ -76,11 +48,43 @@ export const displayTasks = (taskList) => {
 };
 
 export function setListners() {
-
   dragDropListeners();
   editTaskListners();
+  taskCompleteListners();
   addNewListner();
   deleteTaskListner();
   deleteAllListner();
+}
 
+export function addNewTask() {
+  const input = document.querySelector('#input-task');
+  const taskUl = document.querySelector('.list-placeholder');
+  let taskArr = [];
+
+  if (localStorage.getItem('tasks')) {
+    taskArr = JSON.parse(localStorage.getItem('tasks'));
+  }
+
+  taskArr.push(new Task(input.value, false, taskArr.length + 1));
+  input.value = '';
+  taskUl.innerHTML = '';
+  displayTasks(taskArr);
+  setListners();
+}
+
+export function deleteTask(event) {
+  const taskUl = document.querySelector('.list-placeholder');
+  const remDiv = event.target.parentNode.parentNode;
+
+  taskUl.removeChild(remDiv);
+}
+
+export function clearSelected() {
+  const taskUl = document.querySelector('.list-placeholder');
+  const remTasks = document.querySelectorAll('.marked');
+
+  remTasks.forEach((element) => {
+    const remDiv = element.parentElement.parentElement.parentElement;
+    taskUl.removeChild(remDiv);
+  });
 }

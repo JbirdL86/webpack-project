@@ -2,9 +2,9 @@
 import _, { create } from 'lodash';
 import './style.css';
 import setStorage from './storage.js';
-import { taskList, displayTasks, setListners } from './crud.js';
+import { displayTasks, setListners } from './crud.js';
 
-let tasksList = taskList;
+let tasksList = [];
 
 if (localStorage.getItem('tasks')) {
   tasksList = JSON.parse(localStorage.getItem('tasks'));
