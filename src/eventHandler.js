@@ -1,6 +1,8 @@
+/* eslint-disable import/no-cycle */
 import dropSort from './drag.js';
 import checkCompleted from './completed.js';
 import setStorage from './storage.js';
+import { addNewTask, deleteTask, clearSelected } from './crud.js';
 
 function update() {
   const checkBoxItems = document.querySelectorAll('.checkbox');
@@ -10,7 +12,7 @@ function update() {
     newObj.push({
       description: descriptionItems[i].value,
       completed: checkBoxItems[i].checked,
-      index: i,
+      index: i + 1,
     });
   }
   setStorage(newObj);
@@ -48,9 +50,57 @@ export const dragDropListeners = () => {
   });
 };
 
-export const taskCompleteListners = (element) => {
-  element.children[0].children[0].addEventListener('change', (e) => {
-    checkCompleted(e);
+export const taskCompleteListners = () => {
+  const checkboxes = document.querySelectorAll('.checkbox');
+  const checkboxArr = Array.from(checkboxes);
+
+  checkboxArr.forEach((inputBox) => {
+    inputBox.addEventListener('change', (e) => {
+      checkCompleted(e);
+      update();
+    });
+  });
+};
+
+export const addNewListner = () => {
+  const input = document.querySelector('#input-task');
+
+  input.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter' && input.value !== '' && e.target.matches('#input-task')) {
+      addNewTask();
+      update();
+    }
+  });
+};
+
+export const editTaskListners = () => {
+  const tasksInput = document.querySelectorAll('.task-description');
+  const arrInput = Array.from(tasksInput);
+
+  arrInput.forEach((input) => {
+    input.addEventListener('input', () => {
+      update();
+    });
+  });
+};
+
+export const deleteTaskListner = () => {
+  const tasks = document.querySelectorAll('.fa-trash-alt');
+  const tasksArr = Array.from(tasks);
+
+  tasksArr.forEach((task) => {
+    task.addEventListener('click', (e) => {
+      deleteTask(e);
+      update();
+    });
+  });
+};
+
+export const deleteAllListner = () => {
+  const clearTasks = document.querySelector('#clear-tasks');
+
+  clearTasks.addEventListener('click', () => {
+    clearSelected();
     update();
   });
 };

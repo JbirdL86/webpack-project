@@ -36,7 +36,7 @@ main {
   cursor: pointer;
 }
 
-.input-task {
+#input-task {
   border: none;
   padding: 10px;
   border-bottom: 2px solid #f6f6f6;
@@ -54,11 +54,15 @@ main {
 .task-label {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 90%;
 }
 
 .fa-ellipsis-v {
   cursor: cell;
+}
+
+.fa-trash-alt {
+  cursor: pointer;
 }
 
 .marked {
@@ -74,6 +78,7 @@ main {
 
 input[type="text"]:focus {
   outline: none;
+  font-size: 20px;
 }
 
 .clear-completed {
@@ -81,6 +86,17 @@ input[type="text"]:focus {
   display: flex;
   background-color: #f6f6f6;
   justify-content: center;
+}
+
+#clear-tasks {
+  border: none;
+  font-size: 16px;
+}
+
+#clear-tasks:hover {
+  text-decoration: underline;
+  color: black;
+  cursor: pointer;
 }
 
 .dragging {
