@@ -23,7 +23,7 @@ Run:
 
 ## Live Demo
 
-[Live Demo Link](https://jbirdl86.github.io/Capstone/)
+[Live Demo Link](https://jbirdl86.github.io/webpack-project/)
 
 
 ## Authors
